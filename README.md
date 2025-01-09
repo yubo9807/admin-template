@@ -1,5 +1,8 @@
-## 后台管理系统
+# 后台管理系统
 
-UI： https://www.figma.com/design/D59MQaezSZYW8Kynkiotrx/%E8%A5%BF%E5%9F%8E%E4%B8%89%E7%BA%A7%E6%95%B0%E6%8D%AE?node-id=903-3018&node-type=canvas&t=3FdEMNdxYJSlfss3-0
+## 自动生成页面
 
-接口文档： http://10.0.5.55:8600/yape/doc.html#/home
+1. 管理端这种系统有着一定规则的业务系统，强烈建议使用脚手架导入统一处理；
+  - 避免出现不必要的错误。
+2. 不想参与生成路由的页面可通过排出项进行排除；
+3. 页面组件 components 文件夹不会参与路由生成。

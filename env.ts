@@ -12,7 +12,7 @@ let env = {
 
   BASE_ROUTE_URL: process.env.VUE_APP_PUBLICPATH,
 
-  BASE_URL: '/admin'
+  BASE_URL: '/admin-template'
 
 };
 

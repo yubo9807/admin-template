@@ -1,1 +1,0 @@
-import{_ as o,r as n,o as a,e as r,w as s,A as c,t as _}from"./index-BSlZPnKU.js";const i={};function l(e,p){const t=n("LayoutContainer");return a(),r(t,null,{default:s(()=>[c(_(e.$route.path),1)]),_:1})}const f=o(i,[["render",l]]);export{f as default};

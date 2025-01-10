@@ -3,9 +3,10 @@ import { ElMessageBox } from 'element-plus';
 
 import { asyncto, Request, SateConfig } from '@/utils/network';
 import useStoreUser from '../store/user';
+import { nextTick } from 'vue';
 
 let storeUser = null;
-Promise.resolve().then(() => {
+nextTick(() => {
   storeUser = useStoreUser();
 })
 

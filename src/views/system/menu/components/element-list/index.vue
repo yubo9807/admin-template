@@ -1,6 +1,6 @@
 <template>
   <div class="element-list">
-    <LayoutSearchHeader class="reset-search-header-input" right-width="340px">
+    <LayoutSearchHeader right-width="340px">
       <template #left>
         <el-input v-model="form.name" placeholder="请输入元素名称" @keyup.enter="search" @clear="search" />
       </template>

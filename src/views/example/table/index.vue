@@ -1,7 +1,7 @@
 <template>
   <LayoutContainer>
     <template #header>
-      <LayoutSearch class="reset-search-header-input">
+      <LayoutSearch>
         <template #left>
           <el-input v-model="form.name" class="input" @keyup.enter="search" @clear="search" />
         </template>

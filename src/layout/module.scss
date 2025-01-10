@@ -18,7 +18,7 @@ $sideWidth: 240px;
   text-align: center;
   padding: 24px 30px;
   img{
-    width: 100%;
+    width: 50%;
     padding: 0 20px;
     box-sizing: border-box;
   }
@@ -43,5 +43,8 @@ $sideWidth: 240px;
   }
   .logo{
     padding: 24px 3px;
+    img{
+      width: 100%;
+    }
   }
 }

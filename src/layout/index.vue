@@ -5,7 +5,10 @@
       <!-- logo -->
       <div class="logo">
         <router-link to="/">
-          <img v-if="unfold" src="/vite.svg" alt="">
+          <div v-if="unfold">
+            <img src="/vite.svg" alt="">
+            <h1 class="title">后台管理系统</h1>
+          </div>
           <img v-else src="/vite.svg" alt="">
         </router-link>
       </div>

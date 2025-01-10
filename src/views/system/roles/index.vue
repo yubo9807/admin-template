@@ -1,6 +1,6 @@
 <template>
   <LayoutContainer>
-    <LayoutSearch class="reset-search-header-input" right-width="320px">
+    <LayoutSearch right-width="320px">
       <template #left>
         <el-input v-model="form.role" placeholder="请输入角色" @keyup.enter="search" @clear="search" />
       </template>
@@ -56,7 +56,7 @@ export default {
         if (err) {
           this.tableData.value = [];
         } else {
-          this.tableData.value = dataToTree(res.data);
+          this.tableData.value = dataToTree(res.data || []);
         }
       }
     }

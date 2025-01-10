@@ -14,6 +14,7 @@ import './right-control'
 
 import LayoutContainer from './components/layout-container/index.vue'
 import LayoutSearch from './components/layout-search-header/index.vue';
+import RouteCache from '@/components/route-cache/index.vue'
 
 const app = createApp(App);
 app
@@ -25,6 +26,7 @@ app
 for (const name in icons) {
   app.component('Icon' + name, icons[name])
 }
+app.component('RouteCache', RouteCache)
 app.component('LayoutContainer', LayoutContainer)
 app.component('LayoutSearch', LayoutSearch)
 

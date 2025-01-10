@@ -1,6 +1,6 @@
 <template>
   <LayoutContainer>
-    <LayoutSearch class="reset-search-header-input" right-width="320px">
+    <LayoutSearch right-width="320px">
       <template #left>
         <el-tree-select v-model="nowRole.id" :data="roleList" clearable :props="{ children: 'children', label: 'role', value: 'id' }" :render-after-expand="false" @node-click="treeNodeClick" />
         <el-input v-model="form.title" class="input" placeholder="请输入菜单名称" @keyup.enter="search" @clear="search" />

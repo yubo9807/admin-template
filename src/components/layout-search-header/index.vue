@@ -29,15 +29,6 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-.layout-search-header{
-  display: flex;
-  margin-bottom: 10px;
-  .left{
-    margin-right: auto;
-  }
-  .right{
-    text-align: right;
-  }
-}
+<style lang='scss' scoped>
+@use './module.scss';
 </style>

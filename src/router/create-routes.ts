@@ -57,7 +57,10 @@ function getRoutesAll(): RouteRecordRaw[] {
 
     const name = arr.map(val => toGreatHump(val)).join('');
     const item = pageConfig[name];
-    if (!item) continue;
+    if (!item) {
+      console.warn('未找到路由配置：', name);
+      continue;
+    }
 
     const redirect = item && item.redirect;
     let path = '/'+arr.join('/');

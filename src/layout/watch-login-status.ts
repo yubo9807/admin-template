@@ -1,4 +1,5 @@
-import useStoreUser from '../store/user';
+import useStoreUser from '@/store/user';
+import useStoreTabs from '@/store/tabs'
 import { computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -7,6 +8,7 @@ export default () => {
   const $route  = useRoute();
 
   const storeUser = useStoreUser();
+  const storeTabs = useStoreTabs();
 
   const login = computed(() => storeUser.login);
 
@@ -23,6 +25,7 @@ export default () => {
     const redirectHref = $route.path;
     $router.replace(`/login?redirect=${redirectHref}`);
     storeUser.signOut();
+    storeTabs.clearAll();
   }
 
   return {}

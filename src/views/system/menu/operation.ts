@@ -1,5 +1,5 @@
 import { AnyObj } from "@/utils/type";
-import { api_batchSynchronization, api_deleteMenu, api_modifyOrder } from "@/api/permissions";
+import { api_batchSynchronization, api_deleteMenu, api_modifyMenuOrder } from "@/api/permissions";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { getCurrentInstance, reactive, ref } from "vue"
 
@@ -88,7 +88,7 @@ export default () => {
     const currentIndex = siblings.findIndex(item => item.id === row.id);
     const targetRow = siblings[currentIndex + (direction === 'down' ? 1 : -1)];
     const targetId = targetRow.id;
-    const [err,] = await api_modifyOrder({ id1: row.id, id2: targetId });
+    const [err,] = await api_modifyMenuOrder({ id1: row.id, id2: targetId });
     if (err) {
       return;
     }

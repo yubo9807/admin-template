@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
-import { api_getMenuList } from "../api/permissions";
+import { api_getElementList, api_getMenuList } from "../api/permissions";
 import { getTreeRoutes, routesAll } from "../router/create-routes";
 import { RouteRecordRaw } from "vue-router";
 import { deepClone } from "@/utils/object";
 const newRoutes = deepClone(routesAll);  // 防止影响原数据
 
-type DataItem = {
+type MenuItem = {
   name: string
   parent: string
   count: number
@@ -13,12 +13,24 @@ type DataItem = {
   title: string
   selected: boolean
 }
+type ElementItem = {
+  name: string
+  roleId: string
+  key: string
+}
 
+type State = {
+  enable: boolean
+  routerList: RouteRecordRaw[]
+  permitNames: string[]
+  elements: ElementItem[]
+}
 export default defineStore('permissions', {
-  state: () => ({
+  state: (): State => ({
     enable: false,  // 是否启用接口控制权限控制模块
     routerList: [],  // 处理后的树形 router 数据
-    permitNames: newRoutes.map(val => val.name).filter(val => !!val) as string[],  // 允许访问的路由名称
+    permitNames: newRoutes.map(val => val.name as string).filter(val => !!val),  // 允许访问的路由名称
+    elements: [],  // 按钮权限
   }),
 
   actions: {
@@ -31,7 +43,7 @@ export default defineStore('permissions', {
       const [err, res] = await api_getMenuList({ roleId })
       if (err) return;
 
-      const list: DataItem[] = res.data;
+      const list: MenuItem[] = res.data;
       for (const route of newRoutes) {
         const item = list.find(val => val.name === route.name);
         if (!item) continue;  // 没有配置过
@@ -55,6 +67,17 @@ export default defineStore('permissions', {
      */
     matched(name: string) {
       return getRouteMatched(this.routerList, name);
+    },
+
+    async getElements(roleId: string | number) {
+      const [err, res] = await api_getElementList({ roleId })
+      if (err) return;
+      this.elements = res.data.filter(val => val.selected);
+    },
+
+    init(roleId: string | number) {
+      const arr = [this.getMenuList(roleId), this.getElements(roleId)];
+      return Promise.all(arr)
     }
   }
 })

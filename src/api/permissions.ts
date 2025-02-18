@@ -3,6 +3,7 @@ import request from "./request";
 
 const baseURL = '/permissions';
 
+// #region 角色
 /**
  * 获取所有角色
  */
@@ -49,7 +50,11 @@ export function api_deleteRole(data: AnyObj) {
     data,
   })
 }
+// #endregion
 
+
+
+// #region 菜单
 /**
  * 获取所有菜单
  */
@@ -87,6 +92,18 @@ export function api_modifyMenu(data: AnyObj) {
 }
 
 /**
+ * 调整同级顺序
+ */
+export function api_modifyMenuOrder(data: AnyObj) {
+  return request({
+    baseURL,
+    url: '/v1/api/menu/sort',
+    method: 'post',
+    data,
+  })
+}
+
+/**
  * 删除菜单
  */
 export function api_deleteMenu(data: AnyObj) {
@@ -97,6 +114,7 @@ export function api_deleteMenu(data: AnyObj) {
     data,
   })
 }
+// #endregion
 
 
 // #region 接口
@@ -147,9 +165,10 @@ export function api_deleteInterface(data: AnyObj) {
     data,
   })
 }
-
 // #endregion
 
+
+// #region 元素
 /**
  * 获取所有元素
  */
@@ -197,6 +216,7 @@ export function api_deleteElement(data: AnyObj) {
     data,
   })
 }
+// #endregion
 
 /**
  * 批量同步
@@ -205,17 +225,6 @@ export function api_batchSynchronization(data: AnyObj) {
   return request({
     baseURL,
     url: '/v1/api/correlation/synchronization',
-    method: 'post',
-    data,
-  })
-}
-/**
- * 调整同级顺序
- */
-export function api_modifyOrder(data: AnyObj) {
-  return request({
-    baseURL,
-    url: '/v1/api/menu/sort',
     method: 'post',
     data,
   })

@@ -37,7 +37,8 @@ Promise.resolve().then(() => {
         return next();
       }
       if (storePermissions.enable) {
-        await storePermissions.getMenuList(0);
+        console.log(to)
+        await storePermissions.init(0);
         if (!storePermissions.permitNames.includes(to.name as string)) {
           router.replace('/404');
         }

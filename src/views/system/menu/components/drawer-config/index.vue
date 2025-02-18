@@ -2,8 +2,8 @@
   <el-drawer v-model="visible" size="80%">
 
     <el-radio-group v-model="selectType" class="ml-4">
-      <el-radio :label="0">接口</el-radio>
-      <el-radio :label="1">元素</el-radio>
+      <el-radio :value="0">接口</el-radio>
+      <el-radio :value="1">元素</el-radio>
     </el-radio-group>
 
     <InterfaceList ref="interfaceListRef" v-show="selectType === 0" :roleId="roleId" :menuId="menuId" />

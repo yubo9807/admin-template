@@ -1,8 +1,6 @@
 import { defineStore } from "pinia";
 
-export default defineStore({
-  id: 'slidebar',
-
+export default defineStore('slidebar', {
   state: () => ({
     unfold: true,
   }),

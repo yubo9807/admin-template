@@ -54,7 +54,6 @@
     overflow: hidden;
     line-height: 70px;
     border-radius: 4px 4px 0 0;
-    background-image: url('../../assets/imgs/dialog-header-bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
@@ -140,7 +139,6 @@
   }
 
   .el-form {
-    height: calc(100vh - 200px);
     overflow-y: auto;
 
     .el-input {

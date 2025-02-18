@@ -11,9 +11,7 @@ type State = {
   list: TabItem[]
 }
 
-export default defineStore({
-  id: 'tabs',
-
+export default defineStore('tabs', {
   state: (): State => ({
     exclude: [],
     list: [],

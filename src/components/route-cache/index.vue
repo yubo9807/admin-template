@@ -1,7 +1,4 @@
-/**
- * vue3 KeepAlive 使用方式有变动
- * https://v3.cn.vuejs.org/api/built-in-components.html#keep-alive
- */
+<!-- keep-alive BUG（子组件会重复挂载两次）: https://github.com/vuejs/core/issues/12017 -->
 <template>
   <router-view v-slot="row">
     <keep-alive :include="tabs">

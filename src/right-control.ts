@@ -39,8 +39,7 @@ Promise.resolve().then(() => {
       if (storePermissions.enable) {
         await storePermissions.getMenuList(0);
         if (!storePermissions.permitNames.includes(to.name as string)) {
-          const name = getHomeRoute(storeUser.role).name;
-          router.replace({ name });
+          router.replace('/404');
         }
       }
     }

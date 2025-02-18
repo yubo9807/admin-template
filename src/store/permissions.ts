@@ -14,9 +14,7 @@ type DataItem = {
   selected: boolean
 }
 
-export default defineStore({
-  id: 'permissions',
-
+export default defineStore('permissions', {
   state: () => ({
     enable: false,  // 是否启用接口控制权限控制模块
     routerList: [],  // 处理后的树形 router 数据

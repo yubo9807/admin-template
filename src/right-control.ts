@@ -62,9 +62,8 @@ Promise.resolve().then(() => {
     const bool = (roles as (number | string)[]).includes(storeUser.role);
     if (bool) return next();
 
-    // 权限不符合，跳转到首页
-    const name = getHomeRoute(storeUser.role).name;
-    router.replace({ name });
+    // 权限不符合，跳转到 404
+    router.replace('/404');
     next();
   })
 })

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { AnyObj } from "@/utils/type";
 import { delToken, getToken, setToken } from "@/utils/auth";
 import { api_getUserInfo } from "@/api/login";
+import env, { DEVELOPMENT } from "~/env";
 
 export const DEBUGING = false;  // 在后端接口不通的情况下，开启它跳转相应的路有进行开发
 
@@ -52,7 +53,7 @@ export default defineStore({
      * 获取用户信息
      */
     async getUserInfo() {
-      if (true) {
+      if (DEBUGING && env.NODE_ENV === DEVELOPMENT) {
         this.login = 1;
         this.role = ROLE_CONFIG.admin;
         return true;

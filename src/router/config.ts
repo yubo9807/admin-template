@@ -16,6 +16,8 @@ export const exclude = ['login'];  // 排除页面，不参与生成路由
 
 // key 对应 @/src/views/<url> 转大驼峰
 export const pageConfig: RouteConfig = {
+  Home:
+    { icon: '&#xe004;', title: '首页', },
   Example:
     { icon: '&#xe004;', title: '例子', },
   ExampleTable:

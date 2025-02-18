@@ -4,9 +4,10 @@ import { layoutRoutes, routesAll } from './router/create-routes';
 import useStoreUser from './store/user';
 import useStorePermissions from './store/permissions';
 
+let storePermissions: ReturnType<typeof useStorePermissions>;
 Promise.resolve().then(() => {
   const storeUser = useStoreUser();
-  const storePermissions = useStorePermissions();
+  storePermissions = useStorePermissions();
   let lock = true;
   router.beforeEach(async(to, from, next) => {
 
@@ -35,7 +36,13 @@ Promise.resolve().then(() => {
         router.replace('/login');
         return next();
       }
-      // await storePermissions.getMenuList(0);
+      if (storePermissions.enable) {
+        await storePermissions.getMenuList(0);
+        if (!storePermissions.permitNames.includes(to.name as string)) {
+          const name = getHomeRoute(storeUser.role).name;
+          router.replace({ name });
+        }
+      }
     }
     lock = false;
 
@@ -72,11 +79,12 @@ Promise.resolve().then(() => {
  * @returns 
  */
 function getHomeRoute(role: string | number) {
+  const routes = storePermissions.enable ? storePermissions.routerList : layoutRoutes;
   const len = layoutRoutes.length
   let queryIndex = 0;
 
   for (let i = 0; i < len; i++) {
-    const newRoute = layoutRoutes[i];
+    const newRoute = routes[i];
     const roles = newRoute.meta.roles as (string | number)[];
 
     // 1. 没有设置过权限，可以作为首页

@@ -1,24 +1,26 @@
 import { defineStore } from "pinia";
 import { api_getMenuList } from "../api/permissions";
-import { routesAll } from "../router/create-routes";
+import { getTreeRoutes, routesAll } from "../router/create-routes";
 import { RouteRecordRaw } from "vue-router";
-import { deepClone, dataToTree } from "@/utils/object";
+import { deepClone } from "@/utils/object";
 const newRoutes = deepClone(routesAll);  // 防止影响原数据
 
-type TreeItem = {
+type DataItem = {
   name: string
-  id: string
-  title: string
   parent: string
-  children: TreeItem[]
+  count: number
+  roleId: string
+  title: string
+  selected: boolean
 }
 
 export default defineStore({
   id: 'permissions',
 
   state: () => ({
-    originList: [],  // 从后端获取的（具有权限）原数据
+    enable: false,  // 是否启用接口控制权限控制模块
     routerList: [],  // 处理后的树形 router 数据
+    permitNames: newRoutes.map(val => val.name).filter(val => !!val) as string[],  // 允许访问的路由名称
   }),
 
   actions: {
@@ -26,12 +28,26 @@ export default defineStore({
      * @description: 获取并匹配路由数据
      */
     async getMenuList(roleId: string | number) {
+      if (!this.enable) return;
+
       const [err, res] = await api_getMenuList({ roleId })
       if (err) return;
-      const originList = res.data.filter(val => val.selected);
-      const tree = dataToTree(originList);
-      const a = recursion(tree);
-      console.log(a)
+
+      const list: DataItem[] = res.data;
+      for (const route of newRoutes) {
+        const item = list.find(val => val.name === route.name);
+        if (!item) continue;  // 没有配置过
+        if (!item.selected) {
+          const index = this.permitNames.findIndex(val => val === route.name);
+          if (index >= 0) {
+            this.permitNames.splice(index, 1);
+          }
+          route.meta.roles = [];
+        } else {
+          route.meta.roles = [roleId];
+        }
+      }
+      this.routerList = getTreeRoutes(newRoutes)
     },
 
     /**
@@ -44,36 +60,6 @@ export default defineStore({
     }
   }
 })
-
-/**
- * 递归找到与后端匹配的路由
- * @param tree 处理后的树形结构数据
- * @returns
- */
-function recursion(tree: TreeItem[]): RouteRecordRaw[] {
-  const collect = [];
-  tree.forEach((val, index) => {
-    const route = newRoutes.find(item => val.name === item.name);
-    if (route && val.children && val.children.length > 0) {
-      route.children = recursion(val.children);
-    }
-
-    if (route) {
-      route.children ??= [];
-      collect.push(route);
-    } else {
-      // 本地压根儿没有的页面，重定向到 404
-      const defaultRoute: RouteRecordRaw = {
-        name: val.name,
-        path: '/' + val.name.toLowerCase(),
-        meta: { title: val.title },
-        redirect: '/404',
-      };
-      collect.push(defaultRoute);
-    }
-  })
-  return collect;
-}
 
 /**
  * 获取匹配路由

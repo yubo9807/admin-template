@@ -85,7 +85,7 @@ export const routesAll = getRoutesAll();
  * @param routes 
  * @returns 
  */
-function getTreeRoutes(routes: RouteRecordRaw[]) {
+export function getTreeRoutes(routes: RouteRecordRaw[]) {
   const indexArr = [];
   const newRoutes = [];
   routes.forEach((val, i) => {

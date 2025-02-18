@@ -1,6 +1,7 @@
-import { computed, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import useStoreUser from "@/store/user";
+import useStorePermissions from "@/store/permissions";
 
 export default () => {
   const $router = useRouter();
@@ -8,10 +9,16 @@ export default () => {
   const $route = useRoute();
   const nowRoutes = ref([]);
   nowRoutes.value = $route.matched.map(val => val.name);
-  
-  const layoutRoutes = $router.options.routes
-    .find(val => val.name === 'Layout')
-    .children;
+
+  const storePermissions = useStorePermissions();
+  let layoutRoutes = null;
+  if (storePermissions.enable) {
+    layoutRoutes = storePermissions.routerList;
+  } else {
+    layoutRoutes = $router.options.routes
+      .find(val => val.name === 'Layout')
+      .children;
+  }
 
   const navList = ref([]);
   const storeUser = useStoreUser();

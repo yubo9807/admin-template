@@ -22,7 +22,7 @@ export function api_getChainTradingList(params: AnyObj) {
           status: 1,
         }
       ],
-      totalCount: 10,
+      totalCount: 1,
     },
   }])
 }

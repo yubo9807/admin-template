@@ -1,1 +1,0 @@
-import{G as t,g as n,_ as s,r as a,o as c,e as r}from"./index-CUJUVGxI.js";const p={name:"System",components:{RouteCache:t},setup(){const{proxy:e}=n();return{name:e.$options.name}}};function _(e,m,u,f,i,d){const o=a("RouteCache");return c(),r(o)}const C=s(p,[["render",_]]);export{C as default};

@@ -16,7 +16,7 @@ Object.defineProperties(ElForm.props, {
 
 Object.defineProperties(ElLink.props, {
   underline: {
-    value: { default: false }
+    value: { default: 'never' }
   },
   type: {
     value: { default: 'info' }

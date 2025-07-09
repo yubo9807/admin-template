@@ -1,1 +1,0 @@
-import{_ as e,o as _,c}from"./index-f0fda0f1.js";const t={},n={class:"table-add-btn"};function s(d,o){return _(),c("div",n,"+")}const r=e(t,[["render",s],["__scopeId","data-v-e41c347d"]]);export{r as default};
